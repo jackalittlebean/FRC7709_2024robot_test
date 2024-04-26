@@ -51,7 +51,6 @@ public class IntakeSubsystem extends SubsystemBase {
     wheel.setIdleMode(IdleMode.kBrake);
     shaft.burnFlash();
     wheel.burnFlash();
-
   }
 
   public void intakeOut(){
