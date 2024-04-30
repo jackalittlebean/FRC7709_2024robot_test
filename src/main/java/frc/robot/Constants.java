@@ -18,11 +18,15 @@ public final class Constants {
     public static final int mechanismControllerPort = 0;
   }
 
-  public static class ClimberConstants{
+  public static class LeftClimberConstants{
     public static final int leftClimberID = 0;
-    public static final int rightClimberID = 0;
 
     public static final int leftLimitSwitchID = 0;
+  }
+
+  public static class RightClimberConstants{
+    public static final int rightClimberID = 0;
+
     public static final int rightLimitSwitchID = 0;
     
   }
