@@ -5,16 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.RightClimberSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class MoveRightClimber extends Command {
-  private final RightClimberSubsystem rightClimberSubsystem;
-  /** Creates a new MoveRightClimber. */
-  public MoveRightClimber(RightClimberSubsystem rightClimberSubsystem) {
-    this.rightClimberSubsystem = rightClimberSubsystem;
-
-    
+public class PrepareShootAMP extends Command {
+  private final ShooterSubsystem m_ShooterSubsystem;
+  /** Creates a new ShootAMP. */
+  public PrepareShootAMP(ShooterSubsystem shooterSubsystem) {
+    this.m_ShooterSubsystem = shooterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_ShooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -23,7 +22,9 @@ public class MoveRightClimber extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_ShooterSubsystem.shootAMP();
+  }
 
   // Called once the command ends or is interrupted.
   @Override

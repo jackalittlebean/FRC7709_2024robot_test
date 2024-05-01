@@ -5,16 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.RightClimberSubsystem;
+import frc.robot.subsystems.IndexerSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class MoveRightClimber extends Command {
-  private final RightClimberSubsystem rightClimberSubsystem;
-  /** Creates a new MoveRightClimber. */
-  public MoveRightClimber(RightClimberSubsystem rightClimberSubsystem) {
-    this.rightClimberSubsystem = rightClimberSubsystem;
-
-    
+public class ShootSpeaker extends Command {
+  private final ShooterSubsystem m_ShooterSubsystem;
+  private final IndexerSubsystem m_IndexerSubsystem;
+  /** Creates a new FeedNote. */
+  public ShootSpeaker(ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem) {
+    this.m_ShooterSubsystem = shooterSubsystem;
+    this.m_IndexerSubsystem = indexerSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_ShooterSubsystem, m_IndexerSubsystem);
   }
 
   // Called when the command is initially scheduled.

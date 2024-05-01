@@ -4,9 +4,12 @@
 
 package frc.robot;
 
+import frc.robot.Constants.LeftClimberConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LeftClimberSubsystem;
+import frc.robot.subsystems.RightClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -22,6 +25,8 @@ public class RobotContainer {
   private final IndexerSubsystem indexerSubsystem = new IndexerSubsystem();
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final LeftClimberSubsystem leftClimberSubsystem = new LeftClimberSubsystem();
+  private final RightClimberSubsystem rightClimberSubsystem = new RightClimberSubsystem();
 
   private final CommandXboxController driveJoystick = new CommandXboxController(OperatorConstants.driverControllerPort);
   private final CommandXboxController mechanismJoystick = new CommandXboxController(OperatorConstants.mechanismControllerPort);
@@ -43,6 +48,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    
   }
 
   /**
