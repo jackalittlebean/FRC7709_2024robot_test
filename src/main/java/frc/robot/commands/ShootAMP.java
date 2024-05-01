@@ -8,13 +8,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShootSpeaker extends Command {
+public class ShootAMP extends Command {
   private final ShooterSubsystem m_shooterSubsystem;
   private final IndexerSubsystem m_indexerSubsystem;
-  /** Creates a new FeedNote. */
-  public ShootSpeaker(ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem) {
-    this.m_shooterSubsystem = shooterSubsystem;
+  /** Creates a new ShootAMP. */
+  public ShootAMP(ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem) {
     this.m_indexerSubsystem = indexerSubsystem;
+    this.m_shooterSubsystem = shooterSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooterSubsystem, m_indexerSubsystem);
   }
@@ -26,8 +26,8 @@ public class ShootSpeaker extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_shooterSubsystem.isSpeakerReady()){
-      m_indexerSubsystem.feedNoteForSpeaker();
+    if(m_shooterSubsystem.isAMPReady()){
+      m_indexerSubsystem.feedNoteForAMP();
     }
   }
 

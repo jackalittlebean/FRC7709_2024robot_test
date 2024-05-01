@@ -61,6 +61,7 @@ public final class Constants {
     
     public static final double shootSpeakerVoltage = 0;
     public static final double shootAmpVoltage = 0;
+    public static final double shooterRatio = 0;
   }
 
   public static double setMaxOutPut(double outPut, double maxOutPut){

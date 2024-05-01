@@ -10,6 +10,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -41,6 +42,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getShooterSpeed(){
     return shooterEncoder.getVelocity();
+  }
+
+  public boolean isSpeakerReady(){
+    return this.getShooterSpeed() >= Constants.ShooterConstants.shootSpeakerVoltage*Constants.ShooterConstants.shooterRatio;
+  }
+
+  public boolean isAMPReady(){
+    return this.getShooterSpeed() >= Constants.ShooterConstants.shootAmpVoltage*Constants.ShooterConstants.shooterRatio;
   }
 
 
