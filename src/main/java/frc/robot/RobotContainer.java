@@ -6,11 +6,16 @@ package frc.robot;
 
 import frc.robot.Constants.LeftClimberConstants;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.IntakeNote;
+import frc.robot.commands.MoveRightClimber;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LeftClimberSubsystem;
 import frc.robot.subsystems.RightClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -48,6 +53,14 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+
+    DoubleSupplier rightInput = () -> mechanismJoystick.getLeftY();
+    DoubleSupplier leftInput = () -> mechanismJoystick.getLeftY();
+    if(mechanismJoystick.getRightY() != 0){
+      new MoveRightClimber(rightClimberSubsystem);
+    }
+
+    mechanismJoystick.a().whileTrue(new IntakeNote(intakeSubsystem, indexerSubsystem));
     
   }
 

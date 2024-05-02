@@ -26,8 +26,9 @@ public final class Constants {
 
   public static class RightClimberConstants{
     public static final int rightClimberID = 0;
-
     public static final int rightLimitSwitchID = 0;
+
+    public static final double climberHighestSetpoint = 0;
     
   }
 
