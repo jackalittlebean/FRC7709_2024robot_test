@@ -8,9 +8,7 @@ import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
-import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -53,15 +51,15 @@ public class IntakeSubsystem extends SubsystemBase {
     wheel.burnFlash();
   }
 
-  public void intakeOut(){
+  public void intakeSetOut(){
     shaftPidSetpoint = IntakeConstants.intakeOutSetpoint;
   }
 
-  public void intakeBack(){
+  public void intakeSetBack(){
     shaftPidSetpoint = IntakeConstants.intakeBackSetpoint;
   }
 
-  public void intakingNote(){
+  public void wheelTakeNote(){
     wheel.setVoltage(IntakeConstants.intakeNoteWheelVoltage);
   }
 

@@ -23,7 +23,11 @@ public class IndexerSubsystem extends SubsystemBase {
   }
 
   public void intakeNote(){
-    indexerMotor.setVoltage(IndexerConstants.intakeNoteVoltage);
+    if(!this.ifNoteArrive()){
+      indexerMotor.setVoltage(IndexerConstants.intakeNoteVoltage);
+    }else{
+      this.stopIndexer();
+    }
   }
 
   public void feedNoteForSpeaker(){
