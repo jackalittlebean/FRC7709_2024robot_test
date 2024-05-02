@@ -57,7 +57,7 @@ public class RobotContainer {
     DoubleSupplier rightInput = () -> mechanismJoystick.getLeftY();
     DoubleSupplier leftInput = () -> mechanismJoystick.getLeftY();
     if(mechanismJoystick.getRightY() != 0){
-      new MoveRightClimber(rightClimberSubsystem);
+      new MoveRightClimber(rightClimberSubsystem, rightInput);
     }
 
     mechanismJoystick.a().whileTrue(new IntakeNote(intakeSubsystem, indexerSubsystem));
