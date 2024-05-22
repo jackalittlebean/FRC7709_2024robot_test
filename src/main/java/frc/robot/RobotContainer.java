@@ -9,8 +9,8 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.MoveLeftClimber;
 import frc.robot.commands.MoveRightClimber;
-import frc.robot.commands.PrepareShootAMP;
-import frc.robot.commands.PrepareShootSpeaker;
+import frc.robot.commands.ShootAMP;
+import frc.robot.commands.ShootSpeaker;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LeftClimberSubsystem;
@@ -67,6 +67,9 @@ public class RobotContainer {
 
     mechanismJoystick.x().whileTrue(new IntakeNote(intakeSubsystem, indexerSubsystem));
     
+    BooleanSupplier shootNote = () -> mechanismJoystick.y().getAsBoolean();
+    mechanismJoystick.rightTrigger().whileTrue(new ShootSpeaker(shooterSubsystem, indexerSubsystem, shootNote, false));
+    mechanismJoystick.leftTrigger().whileTrue(new ShootAMP(shooterSubsystem, indexerSubsystem, shootNote, false));
     
     
   }

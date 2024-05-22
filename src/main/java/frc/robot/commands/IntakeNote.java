@@ -23,13 +23,13 @@ public class IntakeNote extends Command {
   @Override
   public void initialize() {
     m_intakeSubsystem.intakeSetOut();
-    m_indexerSubsystem.intakeNote();                                                                                              
+    m_indexerSubsystem.intakeNote();     
+    m_intakeSubsystem.wheelTakeNote();                                                                                         
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intakeSubsystem.wheelTakeNote();
   }
 
   // Called once the command ends or is interrupted.
@@ -43,6 +43,6 @@ public class IntakeNote extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_indexerSubsystem.ifNoteArrive();
   }
 }

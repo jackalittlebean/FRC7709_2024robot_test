@@ -31,7 +31,13 @@ public class LeftClimberSubsystem extends SubsystemBase {
   }
 
   public void moveClimber(double voltage){
-    climberMotor.setVoltage(voltage);
+    if(this.ifclimberCanDrop() && voltage < 0){
+      climberMotor.setVoltage(voltage);
+    }else if(this.getPotition() < Constants.RightClimberConstants.climberHighestSetpoint && voltage > 0){
+      climberMotor.setVoltage(voltage);
+    }else{
+      this.stopClimber();
+    }
   }
 
   public boolean ifclimberCanDrop(){

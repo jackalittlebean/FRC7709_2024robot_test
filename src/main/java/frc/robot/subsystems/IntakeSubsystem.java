@@ -31,7 +31,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public IntakeSubsystem() {
     shaft = new CANSparkMax(Constants.IntakeConstants.shaftMotorID, MotorType.kBrushless);
     wheel = new CANSparkMax(Constants.IntakeConstants.wheelMotorID, MotorType.kBrushless);
-    shaftEncoder = new CANcoder(0);
+    shaftEncoder = new CANcoder(IntakeConstants.intakeCancoderID);
     abCaNcoderConfig  = new CANcoderConfiguration();
 
     abCaNcoderConfig.MagnetSensor.SensorDirection = SensorDirectionValue.CounterClockwise_Positive;
@@ -76,7 +76,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public double getShaftPosition(){
-    return shaftEncoder.getPosition().getValue();
+    return shaftEncoder.getAbsolutePosition().getValue();
   }
 
   

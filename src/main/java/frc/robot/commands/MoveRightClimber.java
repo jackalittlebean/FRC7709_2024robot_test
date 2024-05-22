@@ -32,9 +32,7 @@ public class MoveRightClimber extends Command {
   @Override
   public void execute() {
     if(startFunc.getAsBoolean()){
-      if(m_climberSubsystem.ifclimberCanDrop() && m_climberSubsystem.getPotition() < Constants.RightClimberConstants.climberHighestSetpoint){
-        m_climberSubsystem.moveClimber(inputFunc.getAsDouble());
-      }
+      m_climberSubsystem.moveClimber(inputFunc.getAsDouble()*12);
     }
   }
 

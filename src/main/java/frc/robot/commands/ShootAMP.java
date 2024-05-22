@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.IndexerSubsystem;
@@ -12,10 +14,14 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShootAMP extends Command {
   private final ShooterSubsystem m_shooterSubsystem;
   private final IndexerSubsystem m_indexerSubsystem;
+  private final BooleanSupplier shootNote;
+  private boolean isAuto;
   /** Creates a new ShootAMP. */
-  public ShootAMP(ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem) {
+  public ShootAMP(ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem, BooleanSupplier shootNote, boolean isAuto) {
     this.m_indexerSubsystem = indexerSubsystem;
     this.m_shooterSubsystem = shooterSubsystem;
+    this.shootNote = shootNote;
+    this.isAuto = isAuto;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooterSubsystem, m_indexerSubsystem);
   }
@@ -29,7 +35,9 @@ public class ShootAMP extends Command {
   public void execute() {
     m_shooterSubsystem.useShooter(ShooterConstants.shootAmpVoltage, ShooterConstants.shootAMPRpmSetpoint);
     if(m_shooterSubsystem.shooterIsReady()){
-      m_indexerSubsystem.feedNoteForAMP();;
+      if(shootNote.getAsBoolean() || isAuto){
+        m_indexerSubsystem.feedNoteForAMP();
+      }
     }
   }
 

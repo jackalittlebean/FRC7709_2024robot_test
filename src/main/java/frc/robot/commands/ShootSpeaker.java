@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.IndexerSubsystem;
@@ -12,10 +14,14 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShootSpeaker extends Command {
   private final ShooterSubsystem m_shooterSubsystem;
   private final IndexerSubsystem m_indexerSubsystem;
+  private final BooleanSupplier shootNote;
+  private boolean isAuto;
   /** Creates a new FeedNote. */
-  public ShootSpeaker(ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem) {
+  public ShootSpeaker(ShooterSubsystem shooterSubsystem, IndexerSubsystem indexerSubsystem, BooleanSupplier shootNote, boolean isAuto) {
     this.m_shooterSubsystem = shooterSubsystem;
     this.m_indexerSubsystem = indexerSubsystem;
+    this.shootNote = shootNote;
+    this.isAuto = isAuto;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooterSubsystem, m_indexerSubsystem);
   }
@@ -29,7 +35,9 @@ public class ShootSpeaker extends Command {
   public void execute() {
     m_shooterSubsystem.useShooter(ShooterConstants.shootSpeakerVoltage, ShooterConstants.shootSpeakerRpmSetpoint);
     if(m_shooterSubsystem.shooterIsReady()){
-      m_indexerSubsystem.feedNoteForSpeaker();
+      if(shootNote.getAsBoolean() || isAuto){
+        m_indexerSubsystem.feedNoteForSpeaker();
+      }
     }
   }
 
