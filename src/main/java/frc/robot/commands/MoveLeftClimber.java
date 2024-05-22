@@ -9,19 +9,19 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.subsystems.RightClimberSubsystem;
+import frc.robot.subsystems.LeftClimberSubsystem;
 
-public class MoveRightClimber extends Command {
-  private final RightClimberSubsystem m_climberSubsystem;
-  private final DoubleSupplier inputFunc;
+public class MoveLeftClimber extends Command {
+  private final LeftClimberSubsystem m_climberSubsystem;
+  private final DoubleSupplier inputFunc; 
   private final BooleanSupplier startFunc;
-  /** Creates a new MoveRightClimber. */
-  public MoveRightClimber(RightClimberSubsystem rightClimberSubsystem, DoubleSupplier doubleSupplier, BooleanSupplier booleanSupplier) {
-    this.m_climberSubsystem = rightClimberSubsystem;
+  /** Creates a new MoveLeftClimber. */
+  public MoveLeftClimber(LeftClimberSubsystem leftClimberSubsystem, DoubleSupplier doubleSupplier, BooleanSupplier booleanSupplier) {
+    this.m_climberSubsystem = leftClimberSubsystem;
     this.inputFunc = doubleSupplier;
     this.startFunc = booleanSupplier;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(rightClimberSubsystem);
+    addRequirements(leftClimberSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -33,16 +33,14 @@ public class MoveRightClimber extends Command {
   public void execute() {
     if(startFunc.getAsBoolean()){
       if(m_climberSubsystem.ifclimberCanDrop() && m_climberSubsystem.getPotition() < Constants.RightClimberConstants.climberHighestSetpoint){
-        m_climberSubsystem.moveClimber(inputFunc.getAsDouble());
+        m_climberSubsystem.moveClimber(inputFunc.getAsDouble()*12);
       }
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_climberSubsystem.stopClimber();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

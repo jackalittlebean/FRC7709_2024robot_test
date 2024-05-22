@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.LeftClimberConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.IntakeNote;
+import frc.robot.commands.MoveLeftClimber;
 import frc.robot.commands.MoveRightClimber;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -14,6 +15,7 @@ import frc.robot.subsystems.LeftClimberSubsystem;
 import frc.robot.subsystems.RightClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -54,13 +56,15 @@ public class RobotContainer {
    */
   private void configureBindings() {
 
-    DoubleSupplier rightInput = () -> mechanismJoystick.getLeftY();
-    DoubleSupplier leftInput = () -> mechanismJoystick.getLeftY();
-    if(mechanismJoystick.getRightY() != 0){
-      new MoveRightClimber(rightClimberSubsystem, rightInput);
-    }
+    DoubleSupplier leftClimberInput = () -> mechanismJoystick.getLeftY();
+    DoubleSupplier rightClimberInput = () -> mechanismJoystick.getRightY();
+    BooleanSupplier startClimber = () -> mechanismJoystick.getHID().getLeftBumper();
+    
+    leftClimberSubsystem.setDefaultCommand(new MoveLeftClimber(leftClimberSubsystem, leftClimberInput, startClimber));
+    rightClimberSubsystem.setDefaultCommand(new MoveRightClimber(rightClimberSubsystem, rightClimberInput, startClimber));
 
-    mechanismJoystick.a().whileTrue(new IntakeNote(intakeSubsystem, indexerSubsystem));
+    mechanismJoystick.y().whileTrue(new IntakeNote(intakeSubsystem, indexerSubsystem));
+    
     
   }
 

@@ -7,37 +7,40 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class IntakeNote extends Command {
-  private final IntakeSubsystem m_intakeSubsystem;
-  private final IndexerSubsystem m_indexerSubsystem;
-  /** Creates a new IntakeNote. */
-  public IntakeNote(IntakeSubsystem intakeSubsystem, IndexerSubsystem indexerSubsystem) {
-    this.m_intakeSubsystem = intakeSubsystem;
-    this.m_indexerSubsystem = indexerSubsystem;
+public class TrowNoteOut extends Command {
+  private final IndexerSubsystem indexerSubsystem;
+  private final IntakeSubsystem intakeSubsystem;
+
+  /** Creates a new TrowNoteOut. */
+  public TrowNoteOut(IndexerSubsystem indexerSubsystem, IntakeSubsystem intakeSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_intakeSubsystem, indexerSubsystem);
+    this.indexerSubsystem = indexerSubsystem;
+    this.intakeSubsystem = intakeSubsystem;
+
+    addRequirements(indexerSubsystem, intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intakeSubsystem.intakeSetOut();
-    m_indexerSubsystem.intakeNote();                                                                                              
+    intakeSubsystem.intakeSetOut();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intakeSubsystem.wheelTakeNote();
+    indexerSubsystem.feedNoteForAMP();
+    intakeSubsystem.ejectNote();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intakeSubsystem.intakeSetBack();
-    m_intakeSubsystem.stopWheel();
-    m_indexerSubsystem.stopIndexer();
+    intakeSubsystem.intakeSetBack();
+    indexerSubsystem.stopIndexer();
+    intakeSubsystem.stopWheel();
   }
 
   // Returns true when the command should end.
