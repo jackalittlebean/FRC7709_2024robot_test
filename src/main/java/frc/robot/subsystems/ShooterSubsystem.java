@@ -17,6 +17,8 @@ public class ShooterSubsystem extends SubsystemBase {
   private final CANSparkMax shooterMotor;
   private final RelativeEncoder shooterEncoder;
 
+  private double rpmSetpoint;
+
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
     shooterMotor = new CANSparkMax(ShooterConstants.shooterMotorID, MotorType.kBrushless);
@@ -26,6 +28,8 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.setInverted(false);
     shooterMotor.setIdleMode(IdleMode.kBrake);
     shooterMotor.burnFlash();
+
+    rpmSetpoint = 0;
   }
 
   public void shootSpeaker(){
@@ -36,6 +40,11 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor.setVoltage(ShooterConstants.shootAmpVoltage);
   }
 
+  public void useShooter(double shooterVoltage, double rpmSetpoint){
+    this.rpmSetpoint = rpmSetpoint;
+    shooterMotor.setVoltage(shooterVoltage);
+  }
+
   public void stopShooter(){
     shooterMotor.setVoltage(0);
   }
@@ -44,12 +53,8 @@ public class ShooterSubsystem extends SubsystemBase {
     return shooterEncoder.getVelocity();
   }
 
-  public boolean isSpeakerReady(){
-    return this.getShooterSpeed() >= Constants.ShooterConstants.shootSpeakerVoltage*Constants.ShooterConstants.shooterRatio;
-  }
-
-  public boolean isAMPReady(){
-    return this.getShooterSpeed() >= Constants.ShooterConstants.shootAmpVoltage*Constants.ShooterConstants.shooterRatio;
+  public boolean shooterIsReady(){
+    return this.getShooterSpeed() >= rpmSetpoint;
   }
 
 

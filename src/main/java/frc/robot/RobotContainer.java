@@ -9,6 +9,8 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.IntakeNote;
 import frc.robot.commands.MoveLeftClimber;
 import frc.robot.commands.MoveRightClimber;
+import frc.robot.commands.PrepareShootAMP;
+import frc.robot.commands.PrepareShootSpeaker;
 import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LeftClimberSubsystem;
@@ -63,7 +65,8 @@ public class RobotContainer {
     leftClimberSubsystem.setDefaultCommand(new MoveLeftClimber(leftClimberSubsystem, leftClimberInput, startClimber));
     rightClimberSubsystem.setDefaultCommand(new MoveRightClimber(rightClimberSubsystem, rightClimberInput, startClimber));
 
-    mechanismJoystick.y().whileTrue(new IntakeNote(intakeSubsystem, indexerSubsystem));
+    mechanismJoystick.x().whileTrue(new IntakeNote(intakeSubsystem, indexerSubsystem));
+    
     
     
   }
