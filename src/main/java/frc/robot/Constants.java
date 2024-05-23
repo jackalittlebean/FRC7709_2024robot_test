@@ -18,6 +18,40 @@ public final class Constants {
     public static final int mechanismControllerPort = 0;
   }
 
+  public static class SwerveModuleConstants{
+    public static final int leftFrontDriveMotorID = 0;
+    public static final int leftFrontTurningMotorID = 0;
+    public static final int leftFrontCancoderID = 0;
+    public static final int rightFrontDriveMotorID = 0;
+    public static final int rightFrontTurningMotorID = 0;
+    public static final int rightFrontCancoderID = 0;
+    public static final int leftBackDriveMotorID = 0;
+    public static final int leftBackTurningMotorID = 0;
+    public static final int leftBackCancoderID = 0;
+    public static final int rightBackDriveMotorID = 0;
+    public static final int rightBackTurningMotorID = 0;
+    public static final int rightBackCancoderID = 0;
+
+    public static final double leftFrontCancoderOffset = 0;
+    public static final double rightFrontCancoderOffset = 0;
+    public static final double leftBackCancoderOffset = 0;
+    public static final double rightBackCancoderOffset = 0;
+
+    public static final boolean leftFrontTurningMotorInverted = true;
+    public static final boolean leftFrontDriveMotorInverted = true;
+    public static final boolean rightFrontTurningMotorInverted = true;
+    public static final boolean rightFrontDriveMotorInverted = true;
+    public static final boolean leftBackTurningMotorInverted = true;
+    public static final boolean leftBackDriveMotorInverted = true;
+    public static final boolean rightBackTurningMotorInverted = true;
+    public static final boolean rightBackDriveMotorInverted = true;
+
+    public static final double angleKp = 0;
+    public static final double angleKi = 0;
+    public static final double angleKd = 0;
+
+  }
+
   public static class LeftClimberConstants{
     public static final int leftClimberID = 0;
 
@@ -35,6 +69,7 @@ public final class Constants {
   public static class IntakeConstants{
     public static final int shaftMotorID = 0;
     public static final int wheelMotorID = 0;
+    public static final int intakeCancoderID = 0;
 
     public static final double shaftPidKp = 0;
     public static final double shaftPidKi = 0;

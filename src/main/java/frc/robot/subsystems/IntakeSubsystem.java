@@ -84,7 +84,7 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     shaftPidOutput = shaftPidController.calculate(this.getShaftPosition(), shaftPidSetpoint);
-    shaft.setVoltage(shaftPidOutput*12);
+    shaft.setVoltage(Constants.setMaxOutPut(shaftPidOutput*12, 0.4));
     // This method will be called once per scheduler run
   }
 }
