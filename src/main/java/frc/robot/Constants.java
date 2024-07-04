@@ -18,6 +18,10 @@ public final class Constants {
     public static final int mechanismControllerPort = 0;
   }
 
+  public static class SwerveSubsystemConstants{
+    public static final int gyroID = 0;
+  }
+
   public static class SwerveModuleConstants{
     public static final int leftFrontDriveMotorID = 0;
     public static final int leftFrontTurningMotorID = 0;
